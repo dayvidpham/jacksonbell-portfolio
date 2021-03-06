@@ -24,6 +24,11 @@ export function featureNavigator(e) {
     } else {
       setTimeout(() => {
         this.props.setNavigatorPosition("is-featured");
+        // uncomment following lines if you want to count featuring Navigator as a visit
+        // to index page ('/'), you have to also uncomment import { navigateTo }...
+        setTimeout(() => {
+          navigateTo("/");
+        }, 1000);
       }, 0);
     }
   }
