@@ -1,6 +1,5 @@
 import React from "react";
 import injectSheet from "react-jss";
-import { MuiThemeProvider } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -121,7 +120,7 @@ export default connect(
 )(withRoot(injectSheet(globals)(Layout)));
 
 //eslint-disable-next-line no-undef
-export const guery = graphql`
+export const query = graphql`
   query LayoutQuery {
     posts: allMarkdownRemark(
       filter: { id: { regex: "//posts//" } }
