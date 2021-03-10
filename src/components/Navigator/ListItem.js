@@ -6,6 +6,7 @@ import LazyLoad from "react-lazyload";
 
 const styles = theme => ({
   listItem: {
+    padding: ".7em 1em .7em 1em",
     margin: "0 0 .7em 0",
     transition: "height 1s",
     [`@media (min-width: ${theme.mediaQueryTresholds.M}px)`]: {
@@ -22,8 +23,13 @@ const styles = theme => ({
     alignContent: "center",
     alignItems: "center",
     justifyContent: "flex-start",
-    flexDirection: "row",
-    padding: ".7em 1em .7em 1em",
+    flexDirection: "column",
+    //padding: ".7em 1em .7em 1em",
+
+    // my additions
+    "box-sizing": "border-box",
+    "max-width": "270px",
+
     color: theme.navigator.colors.postsListItemLink,
     "@media (hover: hover)": {
       "&:hover": {
@@ -38,34 +44,28 @@ const styles = theme => ({
     position: "relative",
     flexShrink: 0,
     overflow: "hidden",
-    borderRadius: "75% 65%",
-    width: "60px",
-    height: "60px",
-    margin: "0",
+    // borderRadius: "75% 65%",
+    width: "100%",
+    height: "100%",
+    "max-width": "270px",
+    "max-height": "270px",
+
+    margin: "0 0 0.5rem 0",
     transition: "all .5s",
     "& img": {
       width: "100%",
       height: "100%"
     },
-    [`@media (min-width: ${theme.mediaQueryTresholds.M}px)`]: {
-      marginRight: ".5em",
-      width: "80px",
-      height: "80px"
-    },
     [`@media (min-width: ${theme.mediaQueryTresholds.L}px)`]: {
-      marginRight: ".8em",
-      width: "90px",
-      height: "90px",
       transition: "all .3s",
       transitionTimingFunction: "ease",
       ".moving-featured &, .is-aside &": {
-        width: "30px",
-        height: "30px"
+        // width: "30px",
+        // height: "30px"
       }
     }
   },
   listItemText: {
-    margin: "0 0 0 1.5em",
     flexGrow: 1,
     display: "flex",
     flexDirection: "column",

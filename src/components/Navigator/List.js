@@ -33,6 +33,23 @@ const styles = theme => ({
     }
   },
   list: {
+    display: "grid",
+    "grid-template-columns": "repeat(auto-fit, minmax(270px, 1fr))",
+    "grid-auto-flow": "row",
+    "grid-gap": "1.5rem",
+
+    // Horizontally centers boxes items inside grid cells
+    justifyContent: "center",
+    justifyItems: "center",
+
+    [`@media (min-width: ${theme.mediaQueryTresholds.M}px)`]: {
+      "max-width": "600px", // In non-widescreen mode, limits to two columns
+      margin: "auto"
+    },
+    [`@media (min-width: ${theme.mediaQueryTresholds.L}px)`]: {
+      "max-width": "100%"
+    },
+
     listStyle: "none",
     margin: 0,
     padding: 0,
