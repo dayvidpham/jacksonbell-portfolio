@@ -140,7 +140,7 @@ export const query = graphql`
             cover {
               children {
                 ... on ImageSharp {
-                  resolutions(width: 90, height: 90) {
+                  resolutions(width: 270) {
                     ...GatsbyImageSharpResolutions_withWebp_noBase64
                   }
                 }

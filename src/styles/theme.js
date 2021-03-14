@@ -57,6 +57,11 @@ const theme = createMuiTheme({
       fontIncraseForL: 1.3
     }
   },
+  list: {
+    sizes: {
+      listItemMaxWidth: "270px"
+    }
+  },
   main: {
     colors: {
       background: colors.background,

@@ -6,7 +6,7 @@ import LazyLoad from "react-lazyload";
 
 const styles = theme => ({
   listItem: {
-    padding: ".7em 1em .7em 1em",
+    "max-width": `${theme.list.sizes.listItemMaxWidth}`,
     margin: "0 0 .7em 0",
     transition: "height 1s",
     [`@media (min-width: ${theme.mediaQueryTresholds.M}px)`]: {
@@ -14,6 +14,7 @@ const styles = theme => ({
     },
     [`@media (min-width: ${theme.mediaQueryTresholds.L}px)`]: {
       ".moving-featured &, .is-aside &": {
+        padding: ".7em 1em .7em 1em",
         margin: "0 0 0 0"
       }
     }
@@ -24,11 +25,6 @@ const styles = theme => ({
     alignItems: "center",
     justifyContent: "flex-start",
     flexDirection: "column",
-    //padding: ".7em 1em .7em 1em",
-
-    // my additions
-    "box-sizing": "border-box",
-    "max-width": "270px",
 
     color: theme.navigator.colors.postsListItemLink,
     "@media (hover: hover)": {
@@ -47,8 +43,6 @@ const styles = theme => ({
     // borderRadius: "75% 65%",
     width: "100%",
     height: "100%",
-    "max-width": "270px",
-    "max-height": "270px",
 
     margin: "0 0 0.5rem 0",
     transition: "all .5s",
@@ -58,11 +52,7 @@ const styles = theme => ({
     },
     [`@media (min-width: ${theme.mediaQueryTresholds.L}px)`]: {
       transition: "all .3s",
-      transitionTimingFunction: "ease",
-      ".moving-featured &, .is-aside &": {
-        // width: "30px",
-        // height: "30px"
-      }
+      transitionTimingFunction: "ease"
     }
   },
   listItemText: {
@@ -152,7 +142,7 @@ class ListItem extends React.Component {
           {post.node.frontmatter.cover &&
             post.node.frontmatter.cover.children[0] && (
               <div className={`${classes.listItemPointer} pointer`}>
-                <LazyLoad height={60} overflow={true} throttle={300} once={true} offset={100}>
+                <LazyLoad height={270} overflow={true} throttle={300} once={true} offset={100}>
                   <picture>
                     <source
                       type="image/webp"
