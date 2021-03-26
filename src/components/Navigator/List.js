@@ -16,13 +16,9 @@ const styles = theme => ({
     width: "100%"
   },
   inner: {
-    padding: `calc(${theme.bars.sizes.infoBar}px + 1.3rem) 1.3rem calc(${
-      theme.bars.sizes.actionsBar
-    }px + 1.3rem) 1.3rem`,
+    padding: `calc(${theme.bars.sizes.infoBar}px + 1.3rem) 1.3rem calc(${theme.bars.sizes.actionsBar}px + 1.3rem) 1.3rem`,
     [`@media (min-width: ${theme.mediaQueryTresholds.M}px)`]: {
-      padding: `calc(${theme.bars.sizes.infoBar}px + 2rem) 2rem calc(${
-        theme.bars.sizes.actionsBar
-      }px + 2rem) 2rem`
+      padding: `calc(${theme.bars.sizes.infoBar}px + 2rem) 2rem calc(${theme.bars.sizes.actionsBar}px + 2rem) 2rem`
     },
     [`@media (min-width: ${theme.mediaQueryTresholds.L}px)`]: {
       padding: `2rem  calc(1rem + 17px) calc(2rem + 17px) 2rem`,
@@ -60,43 +56,32 @@ const styles = theme => ({
 });
 
 class List extends React.Component {
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.categoryFilter !== this.props.categoryFilter) {
-      setTimeout(forceCheck, 300);
-    }
-  }
-
   render() {
+    // eslint-disable-next-line prettier/prettier
     const {
       classes,
       posts,
       linkOnClick,
       expandOnClick,
-      categoryFilter,
       navigatorShape,
-      removeFilter
     } = this.props;
 
     return (
       <div className={classes.posts}>
         <SpringScrollbars forceCheckOnScroll={true} isNavigator={true}>
           <div className={classes.inner}>
-            <ListHeader
-              expandOnClick={expandOnClick}
-              categoryFilter={categoryFilter}
-              navigatorShape={navigatorShape}
-              removeFilter={removeFilter}
-            />
+            <ListHeader expandOnClick={expandOnClick} navigatorShape={navigatorShape} />
             <ul className={classes.list}>
               {posts &&
+                // eslint-disable-next-line prettier/prettier
                 posts.map((post, i) => (
                   <ListItem
                     key={i}
                     post={post}
                     linkOnClick={linkOnClick}
-                    categoryFilter={categoryFilter}
                   />
-                ))}
+                ))
+              }
             </ul>
           </div>
         </SpringScrollbars>
@@ -111,9 +96,7 @@ List.propTypes = {
   linkOnClick: PropTypes.func.isRequired,
   expandOnClick: PropTypes.func.isRequired,
   navigatorPosition: PropTypes.string.isRequired,
-  navigatorShape: PropTypes.string.isRequired,
-  categoryFilter: PropTypes.string.isRequired,
-  removeFilter: PropTypes.func.isRequired
+  navigatorShape: PropTypes.string.isRequired
 };
 
 export default injectSheet(styles)(List);

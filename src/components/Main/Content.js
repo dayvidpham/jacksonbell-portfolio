@@ -3,12 +3,10 @@ import PropTypes from "prop-types";
 import injectSheet from "react-jss";
 import { connect } from "react-redux";
 
-import { setFontSizeIncrease } from "../../state/store";
-
 const styles = theme => ({
   content: {
     color: theme.main.colors.content,
-    fontSize: props => `calc(${theme.main.fonts.content.size}em * ${props.fontSizeIncrease})`,
+    fontSize: `${theme.main.fonts.content.size}em`,
     lineHeight: theme.main.fonts.content.lineHeight,
     "& a": {
       color: theme.base.colors.link
@@ -97,22 +95,7 @@ const Content = props => {
 Content.propTypes = {
   classes: PropTypes.object.isRequired,
   html: PropTypes.string,
-  children: PropTypes.node,
-  setFontSizeIncrease: PropTypes.func.isRequired,
-  fontSizeIncrease: PropTypes.number.isRequired
+  children: PropTypes.node
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    fontSizeIncrease: state.fontSizeIncrease
-  };
-};
-
-const mapDispatchToProps = {
-  setFontSizeIncrease
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(injectSheet(styles)(Content));
+export default connect()(injectSheet(styles)(Content));

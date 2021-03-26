@@ -8,7 +8,7 @@ import withRoot from "../withRoot";
 import theme from "../styles/theme";
 import globals from "../styles/globals";
 
-import { setFontSizeIncrease, setIsWideScreen } from "../state/store";
+import { setIsWideScreen } from "../state/store";
 
 import asyncComponent from "../components/common/AsyncComponent/";
 import Loading from "../components/common/Loading/";
@@ -34,7 +34,6 @@ const InfoBox = asyncComponent(
 
 class Layout extends React.Component {
   timeouts = {};
-  categories = [];
 
   componentDidMount() {
     this.props.setIsWideScreen(isWideScreen());
@@ -42,31 +41,6 @@ class Layout extends React.Component {
       window.addEventListener("resize", this.resizeThrottler, false);
     }
   }
-
-  componentWillMount() {
-    if (typeof localStorage !== "undefined") {
-      const inLocal = +localStorage.getItem("font-size-increase");
-
-      const inStore = this.props.fontSizeIncrease;
-
-      if (inLocal && inLocal !== inStore && inLocal >= 1 && inLocal <= 1.5) {
-        this.props.setFontSizeIncrease(inLocal);
-      }
-    }
-
-    this.getCategories();
-  }
-
-  getCategories = () => {
-    this.categories = this.props.data.posts.edges.reduce((list, edge, i) => {
-      const category = edge.node.frontmatter.category;
-      if (category && !~list.indexOf(category)) {
-        return list.concat(edge.node.frontmatter.category);
-      } else {
-        return list;
-      }
-    }, []);
-  };
 
   resizeThrottler = () => {
     return timeoutThrottlerHandler(this.timeouts, "resize", 500, this.resizeHandler);
@@ -84,7 +58,7 @@ class Layout extends React.Component {
       <LayoutWrapper>
         {children()}
         <Navigator posts={data.posts.edges} />
-        <ActionsBar categories={this.categories} />
+        {!this.props.isWideScreen && <ActionsBar />}
         <InfoBar pages={data.pages.edges} parts={data.parts.edges} />
         {this.props.isWideScreen && <InfoBox pages={data.pages.edges} parts={data.parts.edges} />}
       </LayoutWrapper>
@@ -96,28 +70,21 @@ Layout.propTypes = {
   data: PropTypes.object.isRequired,
   children: PropTypes.func.isRequired,
   setIsWideScreen: PropTypes.func.isRequired,
-  isWideScreen: PropTypes.bool.isRequired,
-  fontSizeIncrease: PropTypes.number.isRequired,
-  setFontSizeIncrease: PropTypes.func.isRequired
+  isWideScreen: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
   return {
     pages: state.pages,
-    isWideScreen: state.isWideScreen,
-    fontSizeIncrease: state.fontSizeIncrease
+    isWideScreen: state.isWideScreen
   };
 };
 
 const mapDispatchToProps = {
-  setIsWideScreen,
-  setFontSizeIncrease
+  setIsWideScreen
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRoot(injectSheet(globals)(Layout)));
+export default connect(mapStateToProps, mapDispatchToProps)(withRoot(injectSheet(globals)(Layout)));
 
 //eslint-disable-next-line no-undef
 export const query = graphql`
@@ -136,12 +103,12 @@ export const query = graphql`
           frontmatter {
             title
             subTitle
-            category
+
             cover {
               children {
                 ... on ImageSharp {
                   resolutions(width: 270) {
-                    ...GatsbyImageSharpResolutions_withWebp_noBase64
+                    src
                   }
                 }
               }

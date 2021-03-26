@@ -6,7 +6,6 @@ import { setNavigatorPosition, setNavigatorShape } from "../state/store";
 import { moveNavigatorAside } from "../utils/shared";
 import Main from "../components/Main/";
 import Page from "../components/Page/";
-import Footer from "../components/Footer/";
 import Seo from "../components/Seo";
 
 class PageTemplate extends React.Component {
@@ -25,7 +24,6 @@ class PageTemplate extends React.Component {
     return (
       <Main>
         <Page page={data.page} />
-        <Footer footnote={data.footnote} />
         <Seo data={data.post} facebook={facebook} />
       </Main>
     );
@@ -51,10 +49,7 @@ const mapDispatchToProps = {
   setNavigatorShape
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PageTemplate);
+export default connect(mapStateToProps, mapDispatchToProps)(PageTemplate);
 
 //eslint-disable-next-line no-undef
 export const pageQuery = graphql`

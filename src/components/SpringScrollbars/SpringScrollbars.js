@@ -108,7 +108,4 @@ const mapDispatchToProps = {
   setScrollToTop
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SpringScrollbars);
+export default connect(mapStateToProps, mapDispatchToProps)(SpringScrollbars);

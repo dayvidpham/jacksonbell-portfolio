@@ -9,7 +9,7 @@ import { setNavigatorPosition } from "../../state/store";
 import { featureNavigator, moveNavigatorAside } from "./../../utils/shared";
 
 import config from "../../../content/meta/config";
-import avatar from "../../images/jpg/avatar.jpg";
+import avatar from "../../images/png/avatar.png";
 import TopMenu from "./TopMenu";
 
 const styles = theme => ({
@@ -98,7 +98,4 @@ const mapDispatchToProps = {
   setNavigatorPosition
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(injectSheet(styles)(InfoBar));
+export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(InfoBar));

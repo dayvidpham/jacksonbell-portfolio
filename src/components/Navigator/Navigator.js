@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import injectSheet from "react-jss";
 import { forceCheck } from "react-lazyload";
 
-import { setNavigatorPosition, setNavigatorShape, setCategoryFilter } from "../../state/store";
+import { setNavigatorPosition, setNavigatorShape } from "../../state/store";
 import { moveNavigatorAside } from "./../../utils/shared";
 import List from "./List";
 
@@ -31,7 +31,7 @@ const styles = theme => ({
     [`@media (min-width: ${theme.mediaQueryTresholds.L}px)`]: {
       "&.is-featured": {
         transition: "left .9s",
-        width: `calc(100vw - ${theme.info.sizes.width}px - ${theme.bars.sizes.actionsBar}px)`,
+        width: `calc(100vw - ${theme.info.sizes.width}px)`,
         left: `${theme.info.sizes.width}px`,
         top: 0
       },
@@ -107,12 +107,8 @@ class Navigator extends React.Component {
     setTimeout(forceCheck, 600);
   };
 
-  removefilterOnClick = e => {
-    this.props.setCategoryFilter("all posts");
-  };
-
   render() {
-    const { classes, posts, navigatorPosition, navigatorShape, categoryFilter } = this.props;
+    const { classes, posts, navigatorPosition, navigatorShape } = this.props;
 
     return (
       <nav
@@ -127,8 +123,6 @@ class Navigator extends React.Component {
             navigatorShape={navigatorShape}
             linkOnClick={this.linkOnClick}
             expandOnClick={this.expandOnClick}
-            categoryFilter={categoryFilter}
-            removeFilter={this.removefilterOnClick}
           />
         )}
       </nav>
@@ -143,27 +137,20 @@ Navigator.propTypes = {
   navigatorShape: PropTypes.string.isRequired,
   setNavigatorPosition: PropTypes.func.isRequired,
   setNavigatorShape: PropTypes.func.isRequired,
-  isWideScreen: PropTypes.bool.isRequired,
-  categoryFilter: PropTypes.string.isRequired,
-  setCategoryFilter: PropTypes.func.isRequired
+  isWideScreen: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state, ownProps) => {
   return {
     navigatorPosition: state.navigatorPosition,
     navigatorShape: state.navigatorShape,
-    isWideScreen: state.isWideScreen,
-    categoryFilter: state.categoryFilter
+    isWideScreen: state.isWideScreen
   };
 };
 
 const mapDispatchToProps = {
   setNavigatorPosition,
-  setNavigatorShape,
-  setCategoryFilter
+  setNavigatorShape
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(injectSheet(styles)(Navigator));
+export default connect(mapStateToProps, mapDispatchToProps)(injectSheet(styles)(Navigator));

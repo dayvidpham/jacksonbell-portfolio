@@ -105,32 +105,13 @@ const styles = theme => ({
 });
 
 class ListItem extends React.Component {
-  state = {
-    hidden: false
-  };
-
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.categoryFilter !== this.props.categoryFilter) {
-      const category = this.props.post.node.frontmatter.category;
-      const categoryFilter = this.props.categoryFilter;
-
-      if (categoryFilter === "all posts") {
-        this.setState({ hidden: false });
-      } else if (category !== categoryFilter) {
-        this.setState({ hidden: true });
-      } else if (category === categoryFilter) {
-        this.setState({ hidden: false });
-      }
-    }
-  }
-
   render() {
     const { classes, post, linkOnClick } = this.props;
 
     return (
       <li
         className={`${classes.listItem} ${post.node.frontmatter.category}`}
-        style={{ display: `${this.state.hidden ? "none" : "block"}` }}
+        style={{ display: `block` }}
         key={post.node.fields.slug}
       >
         <Link
@@ -139,21 +120,20 @@ class ListItem extends React.Component {
           to={post.node.fields.slug}
           onClick={linkOnClick}
         >
-          {post.node.frontmatter.cover &&
-            post.node.frontmatter.cover.children[0] && (
-              <div className={`${classes.listItemPointer} pointer`}>
-                <LazyLoad height={270} overflow={true} throttle={300} once={true} offset={100}>
-                  <picture>
-                    <source
-                      type="image/webp"
-                      srcSet={post.node.frontmatter.cover.children[0].resolutions.srcSetWebp}
-                    />
-                    <source srcSet={post.node.frontmatter.cover.children[0].resolutions.srcSet} />
-                    <img src={post.node.frontmatter.cover.children[0].resolutions.src} alt="" />
-                  </picture>
-                </LazyLoad>
-              </div>
-            )}
+          {post.node.frontmatter.cover && post.node.frontmatter.cover.children[0] && (
+            <div className={`${classes.listItemPointer} pointer`}>
+              <LazyLoad height={270} overflow={true} throttle={300} once={true} offset={100}>
+                <picture>
+                  <source
+                    type="image/webp"
+                    srcSet={post.node.frontmatter.cover.children[0].resolutions.srcSetWebp}
+                  />
+                  <source srcSet={post.node.frontmatter.cover.children[0].resolutions.srcSet} />
+                  <img src={post.node.frontmatter.cover.children[0].resolutions.src} alt="" />
+                </picture>
+              </LazyLoad>
+            </div>
+          )}
 
           <div className={classes.listItemText}>
             <h1>{post.node.frontmatter.title}</h1>
@@ -168,8 +148,7 @@ class ListItem extends React.Component {
 ListItem.propTypes = {
   classes: PropTypes.object.isRequired,
   post: PropTypes.object.isRequired,
-  linkOnClick: PropTypes.func.isRequired,
-  categoryFilter: PropTypes.string.isRequired
+  linkOnClick: PropTypes.func.isRequired
 };
 
 export default injectSheet(styles)(ListItem);
