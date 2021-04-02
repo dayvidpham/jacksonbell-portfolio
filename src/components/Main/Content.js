@@ -8,6 +8,7 @@ const styles = theme => ({
     color: theme.main.colors.content,
     fontSize: `${theme.main.fonts.content.size}em`,
     lineHeight: theme.main.fonts.content.lineHeight,
+    "margin-top": "2rem",
     "& a": {
       color: theme.base.colors.link
     },
@@ -77,6 +78,7 @@ const styles = theme => ({
       fontSize: `${theme.main.fonts.content.sizeM}em`
     },
     [`@media (min-width: ${theme.mediaQueryTresholds.L}px)`]: {
+      "margin-top": 0,
       fontSize: `${theme.main.fonts.content.sizeL}em`
     }
   }

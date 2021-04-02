@@ -2,6 +2,7 @@ import React from "react";
 import Link from "gatsby-link";
 import PropTypes from "prop-types";
 import injectSheet from "react-jss";
+import Img from "gatsby-image";
 import LazyLoad from "react-lazyload";
 
 const styles = theme => ({
@@ -41,7 +42,7 @@ const styles = theme => ({
     flexShrink: 0,
     overflow: "hidden",
     // borderRadius: "75% 65%",
-    width: "100%",
+    minWidth: "270px",
     height: "100%",
 
     margin: "0 0 0.5rem 0",
@@ -107,6 +108,7 @@ const styles = theme => ({
 class ListItem extends React.Component {
   render() {
     const { classes, post, linkOnClick } = this.props;
+    const cover = post.node.frontmatter.cover;
 
     return (
       <li
@@ -122,16 +124,7 @@ class ListItem extends React.Component {
         >
           {post.node.frontmatter.cover && post.node.frontmatter.cover.children[0] && (
             <div className={`${classes.listItemPointer} pointer`}>
-              <LazyLoad height={270} overflow={true} throttle={300} once={true} offset={100}>
-                <picture>
-                  <source
-                    type="image/webp"
-                    srcSet={post.node.frontmatter.cover.children[0].resolutions.srcSetWebp}
-                  />
-                  <source srcSet={post.node.frontmatter.cover.children[0].resolutions.srcSet} />
-                  <img src={post.node.frontmatter.cover.children[0].resolutions.src} alt="" />
-                </picture>
-              </LazyLoad>
+              <Img sizes={cover.children[0].sizes} />
             </div>
           )}
 

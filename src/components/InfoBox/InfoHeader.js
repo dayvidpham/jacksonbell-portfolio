@@ -66,33 +66,28 @@ const styles = theme => ({
     }
   },
   title: {
-    willChange: "transform, left, top",
+    willChange: "transform, left",
     fontSize: `${theme.info.fonts.boxTitleSize}em`,
     margin: 0,
     float: "left",
+    textAlign: "left",
     transitionTimingFunction: "ease",
-    "& small": {
-      display: "block",
-      fontSize: ".6em",
-      marginTop: ".3em"
-    },
     [`@media (min-width: ${theme.mediaQueryTresholds.M}px)`]: {
       fontSize: `${theme.info.fonts.boxTitleSizeM}em`
     },
     [`@media (min-width: ${theme.mediaQueryTresholds.L}px)`]: {
       fontSize: `${theme.info.fonts.boxTitleSizeL}em`,
       position: "absolute",
-      top: "85px",
-      textAlign: "center",
-      left: "50%",
+      left: "25%",
       transform: "translate(-50%)",
       transition: "all .5s",
       ".is-aside.open &": {
-        left: "60%",
-        top: `${1.9 - theme.info.fonts.boxTitleSizeL}em`,
-        textAlign: "left"
+        left: "25%"
       }
     }
+  },
+  titleLink: {
+    color: "inherit"
   },
   expand: {
     position: "absolute",
@@ -111,15 +106,9 @@ const InfoHeader = props => {
 
   return (
     <header className={classes.header}>
-      <Link className={classes.avatarLink} onClick={avatarOnClick} to="/" title="back to Home page">
-        <div className={classes.avatar}>
-          <img src={avatar} alt="" />
-        </div>
+      <Link className={classes.titleLink} onClick={avatarOnClick} to="/" title="back to Home page">
+        <h1 className={classes.title}>{config.infoTitle.replace(/ /g, "\u00a0")}</h1>
       </Link>
-      <h1 className={classes.title}>
-        {config.infoTitle.replace(/ /g, "\u00a0")}
-        <small>{config.infoTitleNote}</small>
-      </h1>
       <IconButton
         aria-label="Expand the box"
         className={classes.expand}

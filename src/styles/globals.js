@@ -1,6 +1,14 @@
 import theme from "./theme";
 
 export default {
+  "@import": "/fonts/typography.css",
+  "@font-face": [
+    {
+      fontFamily: "Edmondsans Regular",
+      src: "local('Edmondsans Regular'), url('/fonts/Edmondsans-Regular.otf') format('opentype')"
+    }
+  ],
+
   /*
       BEGINNING OF NORMALIZE STYLE
     */
@@ -331,7 +339,7 @@ export default {
       textSizeAdjust: "100%"
     },
     "html.wf-active": {
-      fontFamily: theme.base.fonts.styledFamily
+      fontFamily: "Edmondsans Regular"
     },
     "*, *:before, *:after": {
       boxSizing: "inherit"

@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Img from "gatsby-image";
 
 import Article from "../Main/Article";
 import PostHeader from "./PostHeader";
@@ -13,10 +14,13 @@ const Post = props => {
   const date = ((post || {}).fields || {}).prefix;
   const html = (post || {}).html;
   const htmlAst = (post || {}).htmlAst;
+  const sharpImages = frontmatter.cover.childImageSharp;
+  const responsiveSizes = sharpImages.responsiveSizes;
 
   return (
     <Article>
       <PostHeader title={title} subTitle={subTitle} date={date} />
+      <Img responsiveSizes={responsiveSizes} />
       <Content html={html} />
     </Article>
   );

@@ -22,7 +22,6 @@ class PostTemplate extends React.Component {
   render() {
     const { data, pathContext } = this.props;
     const facebook = (((data || {}).site || {}).siteMetadata || {}).facebook;
-    console.log(data.frontmatter);
 
     return (
       <Main>
@@ -73,6 +72,13 @@ export const postQuery = graphql`
           childImageSharp {
             resize(width: 360) {
               src
+            }
+            responsiveSizes(maxWidth: 800, quality: 100, toFormat: WEBP) {
+              base64
+              aspectRatio
+              src
+              srcSet
+              sizes
             }
           }
         }

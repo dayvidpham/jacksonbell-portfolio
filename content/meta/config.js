@@ -9,10 +9,10 @@ module.exports = {
   siteImage: "preview.jpg",
   siteLanguage: "en",
   // author
-  authorName: "jackson bell",
+  authorName: "jacksonbell",
   authorTwitterAccount: "trappity",
   // info
-  infoTitle: "jackson bell",
+  infoTitle: "jackson\nbell",
   infoTitleNote: "composer/producer",
   // manifest.json
   manifestName: "jackson bell -- composer/producer",
