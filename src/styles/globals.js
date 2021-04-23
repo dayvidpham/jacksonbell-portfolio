@@ -1,13 +1,8 @@
 import theme from "./theme";
+import typography from "../fonts/typography.css";
 
 export default {
-  "@import": "/fonts/typography.css",
-  "@font-face": [
-    {
-      fontFamily: "Edmondsans Regular",
-      src: "local('Edmondsans Regular'), url('/fonts/Edmondsans-Regular.otf') format('opentype')"
-    }
-  ],
+  "@import": `${typography}`,
 
   /*
       BEGINNING OF NORMALIZE STYLE

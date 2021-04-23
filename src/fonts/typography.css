@@ -1,4 +1,14 @@
 @font-face {
   font-family: "Edmondsans Regular";
-  src: local("Edmondsans Regular"), url("Edmondsans-Regular.otf") format("opentype");
+  src: url("./Edmondsans/Edmondsans-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Edmondsans Bold";
+  src: url("./Edmondsans/Edmondsans-Bold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Edmondsans Medium";
+  src: url("./Edmondsans/Edmondsans-Medium.otf") format("opentype");
 }

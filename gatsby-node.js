@@ -115,3 +115,9 @@ exports.modifyBabelrc = ({ babelrc }) => {
     plugins: babelrc.plugins.concat([`syntax-dynamic-import`, `dynamic-import-webpack`])
   };
 };
+
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    devtool: "eval-source-map"
+  });
+};
