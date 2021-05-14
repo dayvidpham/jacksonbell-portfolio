@@ -72,28 +72,31 @@ exports.createPages = ({ graphql, actions }) => {
   });
 };
 
-exports.modifyWebpackConfig = ({ config, stage }) => {
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
   switch (stage) {
     case "build-javascript":
       {
-        let components = store.getState().pages.map(page => page.componentChunkName);
-        components = _.uniq(components);
-        config.plugin("CommonsChunkPlugin", webpack.optimize.CommonsChunkPlugin, [
-          {
-            name: `commons`,
-            chunks: [`app`, ...components],
-            minChunks: (module, count) => {
-              const vendorModuleList = []; // [`material-ui`, `lodash`];
-              const isFramework = _.some(
-                vendorModuleList.map(vendor => {
-                  const regex = new RegExp(`[\\\\/]node_modules[\\\\/]${vendor}[\\\\/].*`, `i`);
-                  return regex.test(module.resource);
-                })
-              );
-              return isFramework || count > 1;
-            }
-          }
-        ]);
+        // let components = store.getState().pages.map(page => page.componentChunkName);
+        // components = _.uniq(components);
+        // config.plugin("CommonsChunkPlugin", webpack.optimize.CommonsChunkPlugin, [
+        //   {
+        //     name: `commons`,
+        //     chunks: [`app`, ...components],
+        //     minChunks: (module, count) => {
+        //       const vendorModuleList = []; // [`material-ui`, `lodash`];
+        //       const isFramework = _.some(
+        //         vendorModuleList.map(vendor => {
+        //           const regex = new RegExp(`[\\\\/]node_modules[\\\\/]${vendor}[\\\\/].*`, `i`);
+        //           return regex.test(module.resource);
+        //         })
+        //       );
+        //       return isFramework || count > 1;
+        //     }
+        //   }
+        // ]);
+        actions.setWebpackConfig({
+          plugins: [webpack.optimize.CommonsChunkPlugin],
+        })
         // config.plugin("BundleAnalyzerPlugin", BundleAnalyzerPlugin, [
         //   {
         //     analyzerMode: "static",
@@ -106,18 +109,21 @@ exports.modifyWebpackConfig = ({ config, stage }) => {
       }
       break;
   }
-  return config;
 };
 
-exports.modifyBabelrc = ({ babelrc }) => {
-  return {
-    ...babelrc,
-    plugins: babelrc.plugins.concat([`syntax-dynamic-import`, `dynamic-import-webpack`])
-  };
-};
+exports.onCreateBabelConfig = ({ actions }) => {
+  actions.setBabelPlugin({
+    name: `@babel/plugin-syntax-dynamic-import`,
+    options: {},
+  })
+  actions.setBabelPlugin({
+    name: `babel-plugin-dynamic-import-webpack`,
+    options: {},
+  })
+}
 
-exports.onCreateWebpackConfig = ({ actions }) => {
-  actions.setWebpackConfig({
-    devtool: "eval-source-map"
-  });
-};
+// exports.onCreateWebpackConfig = ({ actions }) => {
+//   actions.setWebpackConfig({
+//     devtool: "eval-source-map"
+//   });
+// };
