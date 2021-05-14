@@ -1,5 +1,4 @@
 import React from "react";
-import { Router } from "react-router-dom";
 import { Provider } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -12,18 +11,14 @@ import createStore from "./src/state/store";
 //   ssStyles && ssStyles.parentNode.removeChild(ssStyles);
 // };
 
-export const replaceRouterComponent = ({ history }) => {
+export const wrapRootElement = ({ element }) => {
   const store = createStore();
 
-  const ConnectedRouterWrapper = ({ children }) => (
+  const ConnectedRouterWrapper = (
     <Provider store={store}>
-      <Router history={history}>{children}</Router>
+      {element}
     </Provider>
   );
-
-  ConnectedRouterWrapper.propTypes = {
-    children: PropTypes.object.isRequired
-  };
 
   return ConnectedRouterWrapper;
 };
