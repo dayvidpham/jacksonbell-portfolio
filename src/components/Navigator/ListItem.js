@@ -2,7 +2,7 @@ import React from "react";
 import Link from "gatsby-link";
 import PropTypes from "prop-types";
 import injectSheet from "react-jss";
-import Img from "gatsby-image";
+import { GatsbyImage } from "gatsby-plugin-image";
 import LazyLoad from "react-lazyload";
 
 const styles = theme => ({

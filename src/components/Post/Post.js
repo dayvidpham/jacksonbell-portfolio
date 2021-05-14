@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Img from "gatsby-image";
+import { GatsbyImage } from "gatsby-plugin-image";
 
 import Article from "../Main/Article";
 import PostHeader from "./PostHeader";

@@ -52,7 +52,7 @@ class Layout extends React.Component {
 
   render() {
     const { children, data } = this.props;
-
+    console.log(data.fonts);
     // TODO: dynamic management of tabindexes for keybord navigation
     return (
       <LayoutWrapper>
@@ -144,6 +144,19 @@ export const query = graphql`
           frontmatter {
             title
           }
+        }
+      }
+    }
+    fonts: allFile(
+      filter: {
+        extension: { regex: "/(woff2)|(woff)|(ttf)|(otf)|(eof)/" }
+        sourceInstanceName: { eq: "fonts" }
+      }
+    ) {
+      edges {
+        node {
+          sourceInstanceName
+          relativePath
         }
       }
     }

@@ -1,8 +1,9 @@
 import theme from "./theme";
-import typography from "../fonts/typography.css";
+// import typography from "../fonts/typography.css";
+// import typography from "../fonts/typography";
 
 export default {
-  "@import": `${typography}`,
+  // "@import": `${typography}`,
 
   /*
       BEGINNING OF NORMALIZE STYLE
