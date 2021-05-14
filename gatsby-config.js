@@ -1,7 +1,9 @@
 require("dotenv").config();
 const config = require("./content/meta/config");
 
-const query = `{
+const { graphql } = require("gatsby");
+
+const query = graphql`{
   allMarkdownRemark(filter: { id: { regex: "//posts|pages//" } }) {
     edges {
       node {

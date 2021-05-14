@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import Main from "../components/Main/";
 import { connect } from "react-redux";
-require("core-js/fn/array/find");
-require("prismjs/themes/prism-okaidia.css");
+import { graphql } from "gatsby";
 
 import { setNavigatorPosition, setNavigatorShape } from "../state/store";
 import { moveNavigatorAside } from "../utils/shared";
@@ -21,12 +20,11 @@ class PostTemplate extends React.Component {
 
   render() {
     const { data, pathContext } = this.props;
-    const facebook = (((data || {}).site || {}).siteMetadata || {}).facebook;
 
     return (
       <Main>
         <Post post={data.post} slug={pathContext.slug} author={data.author} />
-        <Seo data={data.post} facebook={facebook} />
+        <Seo data={data.post} />
       </Main>
     );
   }

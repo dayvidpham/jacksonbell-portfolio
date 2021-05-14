@@ -16,8 +16,6 @@ class Index extends React.Component {
   }
 
   render() {
-    const { data } = this.props;
-
     return (
       <div>
         <Seo />
@@ -27,7 +25,6 @@ class Index extends React.Component {
 }
 
 Index.propTypes = {
-  data: PropTypes.object.isRequired,
   navigatorPosition: PropTypes.string.isRequired,
   setNavigatorPosition: PropTypes.func.isRequired,
   isWideScreen: PropTypes.bool.isRequired
@@ -46,16 +43,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);
-
-//eslint-disable-next-line no-undef
-export const pageQuery = graphql`
-  query IndexQuery {
-    site {
-      siteMetadata {
-        facebook {
-          appId
-        }
-      }
-    }
-  }
-`;

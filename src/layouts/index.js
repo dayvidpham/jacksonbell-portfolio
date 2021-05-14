@@ -2,6 +2,7 @@ import React from "react";
 import injectSheet from "react-jss";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { graphql } from "gatsby";
 
 import withRoot from "../withRoot";
 
