@@ -19,11 +19,11 @@ class PostTemplate extends React.Component {
   }
 
   render() {
-    const { data, pathContext } = this.props;
+    const { data, pageContext } = this.props;
 
     return (
       <Main>
-        <Post post={data.post} slug={pathContext.slug} author={data.author} />
+        <Post post={data.post} slug={pageContext.slug} author={data.author} />
         <Seo data={data.post} />
       </Main>
     );
@@ -32,7 +32,7 @@ class PostTemplate extends React.Component {
 
 PostTemplate.propTypes = {
   data: PropTypes.object.isRequired,
-  pathContext: PropTypes.object.isRequired,
+  pageContext: PropTypes.object.isRequired,
   navigatorPosition: PropTypes.string.isRequired,
   setNavigatorPosition: PropTypes.func.isRequired,
   isWideScreen: PropTypes.bool.isRequired
