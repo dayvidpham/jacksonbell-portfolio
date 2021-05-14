@@ -12,7 +12,7 @@ import createStore from "./src/state/store";
 //   ssStyles && ssStyles.parentNode.removeChild(ssStyles);
 // };
 
-exports.replaceRouterComponent = ({ history }) => {
+export const replaceRouterComponent = ({ history }) => {
   const store = createStore();
 
   const ConnectedRouterWrapper = ({ children }) => (
