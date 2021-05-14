@@ -1,35 +1,6 @@
 require("dotenv").config();
 const config = require("./content/meta/config");
 
-const { graphql } = require("gatsby");
-
-const query = graphql`{
-  allMarkdownRemark(filter: { id: { regex: "//posts|pages//" } }) {
-    edges {
-      node {
-        objectID: id
-        fields {
-          slug
-        }
-        internal {
-          content
-        }
-        frontmatter {
-          title
-          subTitle
-        }
-      }
-    }
-  }
-}`;
-
-const queries = [
-  {
-    query,
-    transformer: ({ data }) => data.allMarkdownRemark.edges.map(({ node }) => node)
-  }
-];
-
 module.exports = {
   siteMetadata: {
     title: config.siteTitle,
