@@ -2,6 +2,10 @@ require("dotenv").config();
 const config = require("./content/meta/config");
 
 module.exports = {
+  flags: {
+    DEV_SSR: true,
+    PARALLEL_SOURCING: true,
+  },
   siteMetadata: {
     title: config.siteTitle,
     description: config.siteDescription,
