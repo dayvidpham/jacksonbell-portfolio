@@ -2,7 +2,7 @@ import React from "react";
 import injectSheet from "react-jss";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { graphql } from "gatsby";
+import { StaticQuery, graphql } from "gatsby";
 
 import withRoot from "../withRoot";
 
@@ -56,8 +56,9 @@ class Layout extends React.Component {
     console.log(data.fonts);
     // TODO: dynamic management of tabindexes for keybord navigation
     return (
+      // <StaticQuery
       <LayoutWrapper>
-        {children()}
+        {children}
         <Navigator posts={data.posts.edges} />
         {!this.props.isWideScreen && <ActionsBar />}
         <InfoBar pages={data.pages.edges} parts={data.parts.edges} />
@@ -69,7 +70,7 @@ class Layout extends React.Component {
 
 Layout.propTypes = {
   data: PropTypes.object.isRequired,
-  children: PropTypes.func.isRequired,
+  children: PropTypes.object.isRequired,
   setIsWideScreen: PropTypes.func.isRequired,
   isWideScreen: PropTypes.bool.isRequired
 };
@@ -87,7 +88,6 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRoot(injectSheet(globals)(Layout)));
 
-//eslint-disable-next-line no-undef
 export const query = graphql`
   query LayoutQuery {
     posts: allMarkdownRemark(
@@ -108,11 +108,8 @@ export const query = graphql`
             cover {
               children {
                 ... on ImageSharp {
-                  sizes(maxWidth: 270, quality: 100) {
-                    ...GatsbyImageSharpSizes_withWebp
-                  }
-                  resolutions(width: 270) {
-                    src
+                  fluid(maxWidth: 270, quality: 100) {
+                    ...GatsbyImageSharpFluid_withWebp
                   }
                 }
               }
@@ -145,19 +142,6 @@ export const query = graphql`
           frontmatter {
             title
           }
-        }
-      }
-    }
-    fonts: allFile(
-      filter: {
-        extension: { regex: "/(woff2)|(woff)|(ttf)|(otf)|(eof)/" }
-        sourceInstanceName: { eq: "fonts" }
-      }
-    ) {
-      edges {
-        node {
-          sourceInstanceName
-          relativePath
         }
       }
     }

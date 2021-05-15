@@ -53,7 +53,7 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps)(PostTemplate);
 
 //eslint-disable-next-line no-undef
-export const postQuery = graphql`
+export const query = graphql`
   query PostBySlug($slug: String!) {
     post: markdownRemark(fields: { slug: { eq: $slug } }) {
       id
@@ -71,12 +71,8 @@ export const postQuery = graphql`
             resize(width: 360) {
               src
             }
-            responsiveSizes(maxWidth: 800, quality: 100, toFormat: WEBP) {
-              base64
-              aspectRatio
-              src
-              srcSet
-              sizes
+            fluid(maxWidth: 800, quality: 100) {
+              ...GatsbyImageSharpFluid_withWebp
             }
           }
         }
